@@ -1,5 +1,6 @@
 platform: web
 ? Can you stop the screensaver kicking in?
+ https://github.com/richtr/NoSleep.js
 ? What's the dev feedback loop like?
 ? Can the vr/rendering be run on a thread?
 ? What is the vr latency/jitter like?
