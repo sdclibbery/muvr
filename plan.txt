@@ -1,0 +1,13 @@
+platform: web
+? Can you stop the screensaver kicking in?
+? What's the dev feedback loop like?
+? Can the vr/rendering be run on a thread?
+? What is the vr latency/jitter like?
+? Can the audio be run on a thread?
+? What is the audio latency/jitter like?
+? Could it interface with an external gyro (eg yocto 3d)?
+
+platform: android
+? What's the dev feedback loop like? How good is the emulator for this?
+? What's the audio synthesis situation like on android? JSyn?
+? Do we need native code for audio and/or vr rendering?
