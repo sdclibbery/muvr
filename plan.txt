@@ -1,10 +1,16 @@
 platform: web
+ https://www.smashingmagazine.com/2017/09/guide-virtual-reality-web-developers/
 ? Can you stop the screensaver kicking in?
- https://github.com/richtr/NoSleep.js
+ Ish: https://github.com/richtr/NoSleep.js
 ? What's the dev feedback loop like?
+ game: edit, reload browser page; debug with web inspector
+ vr: edit, publish, reload phone browser
 ? Can the vr/rendering be run on a thread?
-? What is the vr latency/jitter like?
+ Ish: https://hacks.mozilla.org/2016/01/webgl-off-the-main-thread/
 ? Can the audio be run on a thread?
+ Should be able to do waveform generation in a web worker, but all actual AudioContext usage has to be on main thread
+ https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
+? What is the vr latency/jitter like?
 ? What is the audio latency/jitter like?
 ? Could it interface with an external gyro (eg yocto 3d)?
 
@@ -12,3 +18,12 @@ platform: android
 ? What's the dev feedback loop like? How good is the emulator for this?
 ? What's the audio synthesis situation like on android? JSyn?
 ? Do we need native code for audio and/or vr rendering?
+
+Game Ideas
+o Rez meets Musis
+collect multiple items at once; they activate when released
+items have musical effects; notes, effects, rythms, instruments etc
+items also have corresponding visual effects
+maybe parameterise most items and they get given random values, for variety
+o Monkey Zorb Balls
+You are inside the monkey ball, and must tilt your head to make the ball roll
