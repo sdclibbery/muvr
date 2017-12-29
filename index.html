@@ -1,0 +1,40 @@
+<html>
+<head>
+  <script type="text/javascript" src="muvr.js"></script>
+  <script type="text/javascript" src="draw.js"></script>
+  <script type="text/javascript" src="terrain.js"></script>
+  <script type="text/javascript" src="draw.terrain.js"></script>
+  </head>
+<body style="margin:0px; background-color: black;">
+  <canvas id="canvas" class="fullscreen" style="width:100%; height:100%;"></canvas>
+  <script type="text/javascript">
+
+try { if (!AudioContext) { throw 1; } } catch(e) { document.getElementById('info').innerHTML = 'Web Audio not supported!'; }
+
+muvr.begin();
+
+var canvas = document.getElementById("canvas");
+
+function onResize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+};
+window.addEventListener('resize', onResize, false);
+onResize();
+
+var ctxGl = canvas.getContext("webgl");
+if (!ctxGl) { ctxGl = canvas.getContext("experimental-webgl"); }
+if (!ctxGl) { document.getElementById('info').innerHTML = 'WebGL not supported!'; }
+var tLast;
+var frame = function (t) {
+  if (tLast) {
+    muvr.frame(t, (t - tLast)/1000, ctxGl, canvas.width, canvas.height);
+  }
+  tLast = t;
+  window.requestAnimationFrame(frame);
+};
+window.requestAnimationFrame(frame);
+
+  </script>
+</body>
+</html>

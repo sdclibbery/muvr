@@ -1,5 +1,6 @@
 platform: web
  https://www.smashingmagazine.com/2017/09/guide-virtual-reality-web-developers/
+ webvr does not support my phone, which would need google vr services installed, but it cant
 ? Can you stop the screensaver kicking in?
  Ish: https://github.com/richtr/NoSleep.js
 ? What's the dev feedback loop like?
@@ -18,6 +19,12 @@ platform: android
 ? What's the dev feedback loop like? How good is the emulator for this?
 ? What's the audio synthesis situation like on android? JSyn?
 ? Do we need native code for audio and/or vr rendering?
+
+Web Prototype
+o Basic webgl
+o 2 viewport vr rendering
+o Look up and down
+o Look left and right tilt
 
 Game Ideas
 o Rez meets Musis
