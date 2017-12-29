@@ -1,5 +1,3 @@
-// Adapter for visual rendering
-
 muvr.draw = function () {
   this.time = 0;
   this.gl = null;

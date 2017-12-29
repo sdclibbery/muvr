@@ -1,36 +1,35 @@
 (function () {
 
-// Adapter for drawing terrain
+var vtxShader = `
+  uniform float timeIn;
+  uniform mat4 perspIn;
+  uniform vec3 colIn;
 
-var vtxShader = ""
-+"  uniform float timeIn;"
-+"  uniform mat4 perspIn;"
-+"  uniform vec3 colIn;"
-+"  "
-+"  attribute vec3 posIn;"
-+"  "
-+"  varying vec3 colour;"
-+"  "
-+"  void main() {"
-+"    float repeatSize = 4.0;" // size of one square in the terrain grid
-+"    float speed = repeatSize * 90.0;" // speed of terrain motion in metres per second
-+"    float distance = timeIn * speed;" // current distance the grid origin should have reached
-+"    float delta = mod(distance, repeatSize);" // amount to move the drawn grid so it lines up with where the grid should be
-+"    float index = distance-posIn.z-delta;" // value to use that moves with the grid without snapping back on the repeat
-+"    float wave = 0.5*(sin(posIn.x*(0.14))+sin(index*(0.13)));"
-+"    gl_Position = perspIn * vec4(posIn.x, posIn.y+wave*3.0, posIn.z + delta, 1);" // apply the delta to give the sense of motion
-+"    float b = index/10.0 + abs(posIn.x)*100.0;" // value to use to look up the colour
-+"    colour = colIn;"
-+"  }";
+  attribute vec3 posIn;
 
-var frgShader = ""
-+"  precision mediump float;"
-+"  "
-+"  varying vec3 colour;"
-+"  "
-+"  void main() {"
-+"    gl_FragColor = vec4(colour, 1);"
-+"  }";
+  varying vec3 colour;
+
+  void main() {
+    float repeatSize = 4.0;                   // size of one square in the terrain grid
+    float speed = repeatSize * 9.0;          // speed of terrain motion in metres per second
+    float distance = timeIn * speed;          // current distance the grid origin should have reached
+    float delta = mod(distance, repeatSize);  // amount to move the drawn grid so it lines up with where the grid should be
+    float index = distance-posIn.z-delta;     // value to use that moves with the grid without snapping back on the repeat
+    float wave = 0.5*(sin(posIn.x*(0.14))+sin(index*(0.13)));
+    gl_Position = perspIn * vec4(posIn.x, posIn.y+wave*3.0, posIn.z + delta, 1); // apply the delta to give the sense of motion
+    colour = colIn*(0.3 + pow(abs(wave), 1.5));
+  }
+`;
+
+var frgShader = `
+  precision mediump float;
+
+  varying vec3 colour;
+
+  void main() {
+    gl_FragColor = vec4(colour, 1);
+  }
+`;
 
 var resX = 50;
 var resY = 50;
@@ -82,6 +81,7 @@ muvr.draw.prototype.terrain = function () {
       this.loadShader(frgShader, this.gl.FRAGMENT_SHADER)
     ]);
     posBuf = this.gl.createBuffer();
+    indexBuffer = this.createIndexBuffer(indexes);
     posAttr = this.gl.getAttribLocation(program, "posIn");
     perspUnif = this.gl.getUniformLocation(program, "perspIn");
     timeUnif = this.gl.getUniformLocation(program, "timeIn");

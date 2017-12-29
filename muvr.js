@@ -1,7 +1,5 @@
 (function () {
 
-// This is the glue code
-
 muvr = {}
 
 var terrain;

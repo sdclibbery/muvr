@@ -1,7 +1,5 @@
 (function () {
 
-// Domain
-
 muvr.terrain = function () {
 };
 
