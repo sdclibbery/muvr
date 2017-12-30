@@ -4,12 +4,12 @@
   <script type="text/javascript" src="draw.js"></script>
   <script type="text/javascript" src="terrain.js"></script>
   <script type="text/javascript" src="draw.terrain.js"></script>
-  </head>
+</head>
 <body style="margin:0px; background-color: black;">
   <canvas id="canvas" class="fullscreen" style="width:100%; height:100%;"></canvas>
   <script type="text/javascript">
 
-try { if (!AudioContext) { throw 1; } } catch(e) { document.getElementById('info').innerHTML = 'Web Audio not supported!'; }
+try { if (!AudioContext) { throw 1; } } catch(e) { console.log('Web Audio not supported!'); }
 
 muvr.begin();
 

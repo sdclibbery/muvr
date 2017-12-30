@@ -21,7 +21,7 @@ platform: android
 ? Do we need native code for audio and/or vr rendering?
 
 Web Prototype
-o Basic webgl
+x Basic webgl
 o 2 viewport vr rendering
 o Look up and down
 o Look left and right tilt

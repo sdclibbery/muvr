@@ -1,6 +1,6 @@
 (function () {
 
-muvr = {}
+muvr = {};
 
 var terrain;
 
