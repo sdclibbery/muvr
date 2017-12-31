@@ -20,6 +20,14 @@ muvr.draw.prototype.frameStart = function (t, gl, cw, ch) {
   this.gl.clear(this.gl.COLOR_BUFFER_BIT|this.gl.DEPTH_BUFFER_BIT);
 };
 
+muvr.draw.prototype.leftStart = function () {
+  this.gl.viewport(0, 0, this.cw/2, this.ch);
+};
+
+muvr.draw.prototype.rightStart = function () {
+  this.gl.viewport(this.cw/2, 0, this.cw/2, this.ch);
+};
+
 muvr.draw.prototype.xFromCanvas = function (x) {
   return (x*2 - this.cw) / this.ch;
 };
@@ -31,7 +39,7 @@ muvr.draw.prototype.toX = function (x) {
 };
 
 muvr.draw.prototype.perspectiveMatrix = function (fovy, near, far) {
-    var aspect = this.cw / this.ch;
+    var aspect = this.cw/2 / this.ch;
     var f = 1.0 / Math.tan(fovy / 2);
     var nf = 1 / (near - far);
     var out = new Float32Array(16);
