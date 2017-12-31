@@ -13,6 +13,7 @@ muvr.draw.prototype.frameStart = function (t, gl, cw, ch) {
   this.cw = cw;
   this.ch = ch;
 
+  this.gl.viewport(0, 0, this.cw, this.ch);
   this.gl.clearColor(0, 0, 0, 1);
   this.gl.enable(this.gl.DEPTH_TEST);
   this.gl.depthFunc(this.gl.LEQUAL);

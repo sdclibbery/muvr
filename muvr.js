@@ -2,6 +2,7 @@
 
 muvr = {};
 
+var draw;
 var terrain;
 
 muvr.begin = function () {
