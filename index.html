@@ -15,6 +15,14 @@ muvr.begin();
 
 var canvas = document.getElementById("canvas");
 
+function goFullscreen () {
+  if (canvas.webkitRequestFullscreen) { canvas.webkitRequestFullscreen(); }
+  if (canvas.mozRequestFullScreen) { canvas.mozRequestFullScreen(); }
+  if (canvas.msRequestFullscreen) { canvas.msRequestFullscreen(); }
+}
+window.onmousedown = goFullscreen;
+window.ontouchstart = goFullscreen;
+
 function onResize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;

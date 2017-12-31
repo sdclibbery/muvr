@@ -22,11 +22,8 @@ platform: android
 
 Web Prototype
 x Basic webgl
-o Respond webgl to screen size change properly
- ! It currently seems to have the right proj matrix, but all crushed up to the old viewport
- ! canvas and webgl are responding
- ! persp matrix is not borken
-o fullscreen, landscape
+x Respond webgl to screen size change properly
+x fullscreen
 o 2 viewport vr rendering
 o Look up and down - https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation
 o Look left and right tilt
