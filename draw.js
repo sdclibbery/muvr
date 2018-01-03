@@ -2,6 +2,7 @@
 const fovy = 1.7;
 const near = 0.001;
 const far = 100;
+const eyeGap = 1;
 
 muvr.draw = function () {
   this.time = 0;
@@ -17,8 +18,9 @@ muvr.draw.prototype.frameStart = function (t, gl, cw, ch) {
   }
   this.cw = cw;
   this.ch = ch;
-
+  this._perspectiveMatrix = createPerspectiveMatrix(this.cw / this.ch, 0);
   this.gl.viewport(0, 0, this.cw, this.ch);
+
   this.gl.clearColor(0, 0, 0, 1);
   this.gl.enable(this.gl.DEPTH_TEST);
   this.gl.depthFunc(this.gl.LEQUAL);
@@ -26,28 +28,20 @@ muvr.draw.prototype.frameStart = function (t, gl, cw, ch) {
 };
 
 muvr.draw.prototype.leftStart = function () {
+  this._perspectiveMatrix = createPerspectiveMatrix(this.cw/2 / this.ch, -eyeGap/2);
   this.gl.viewport(0, 0, this.cw/2, this.ch);
 };
 
 muvr.draw.prototype.rightStart = function () {
+  this._perspectiveMatrix = createPerspectiveMatrix(this.cw/2 / this.ch, eyeGap/2);
   this.gl.viewport(this.cw/2, 0, this.cw/2, this.ch);
 };
 
-muvr.draw.prototype.xFromCanvas = function (x) {
-  return (x*2 - this.cw) / this.ch;
-};
-muvr.draw.prototype.yFromCanvas = function (y) {
-  return 1 - y*2/this.ch;
-};
-muvr.draw.prototype.toX = function (x) {
-  return x * this.ch / this.cw;
-};
-
 muvr.draw.prototype.perspectiveMatrix = function () {
-  return perspectiveMatrix(this.cw/2 / this.ch);
+  return this._perspectiveMatrix;
 };
 
-const perspectiveMatrix = function (aspect) {
+const createPerspectiveMatrix = function (aspect, offset) {
   const f = 1.0 / Math.tan(fovy / 2);
   const nf = 1 / (near - far);
   const out = new Float32Array(16);
@@ -63,11 +57,21 @@ const perspectiveMatrix = function (aspect) {
   out[9] = 0;
   out[10] = (far + near) * nf;
   out[11] = -1;
-  out[12] = 0;
+  out[12] = offset;
   out[13] = 0;
   out[14] = (2 * far * near) * nf;
   out[15] = 0;
   return out;
+};
+
+muvr.draw.prototype.xFromCanvas = function (x) {
+  return (x*2 - this.cw) / this.ch;
+};
+muvr.draw.prototype.yFromCanvas = function (y) {
+  return 1 - y*2/this.ch;
+};
+muvr.draw.prototype.toX = function (x) {
+  return x * this.ch / this.cw;
 };
 
 muvr.draw.prototype.squareVtxs = function (x, y, size) {
