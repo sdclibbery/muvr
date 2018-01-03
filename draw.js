@@ -1,3 +1,8 @@
+
+const fovy = 1.7;
+const near = 0.001;
+const far = 100;
+
 muvr.draw = function () {
   this.time = 0;
   this.gl = null;
@@ -38,28 +43,31 @@ muvr.draw.prototype.toX = function (x) {
   return x * this.ch / this.cw;
 };
 
-muvr.draw.prototype.perspectiveMatrix = function (fovy, near, far) {
-    var aspect = this.cw/2 / this.ch;
-    var f = 1.0 / Math.tan(fovy / 2);
-    var nf = 1 / (near - far);
-    var out = new Float32Array(16);
-    out[0] = f / aspect;
-    out[1] = 0;
-    out[2] = 0;
-    out[3] = 0;
-    out[4] = 0;
-    out[5] = f;
-    out[6] = 0;
-    out[7] = 0;
-    out[8] = 0;
-    out[9] = 0;
-    out[10] = (far + near) * nf;
-    out[11] = -1;
-    out[12] = 0;
-    out[13] = 0;
-    out[14] = (2 * far * near) * nf;
-    out[15] = 0;
-    return out;
+muvr.draw.prototype.perspectiveMatrix = function () {
+  return perspectiveMatrix(this.cw/2 / this.ch);
+};
+
+const perspectiveMatrix = function (aspect) {
+  const f = 1.0 / Math.tan(fovy / 2);
+  const nf = 1 / (near - far);
+  const out = new Float32Array(16);
+  out[0] = f / aspect;
+  out[1] = 0;
+  out[2] = 0;
+  out[3] = 0;
+  out[4] = 0;
+  out[5] = f;
+  out[6] = 0;
+  out[7] = 0;
+  out[8] = 0;
+  out[9] = 0;
+  out[10] = (far + near) * nf;
+  out[11] = -1;
+  out[12] = 0;
+  out[13] = 0;
+  out[14] = (2 * far * near) * nf;
+  out[15] = 0;
+  return out;
 };
 
 muvr.draw.prototype.squareVtxs = function (x, y, size) {

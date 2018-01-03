@@ -92,12 +92,9 @@ muvr.draw.prototype.terrain = function () {
 
   this.gl.uniform1f(timeUnif, this.time/1000);
   this.gl.uniform3f(colUnif, 0.5, 0.6, 0.8);
-
-  var perspectiveMatrix = this.perspectiveMatrix(1.7, 0.001, 100);
-  this.gl.uniformMatrix4fv(perspUnif, false, perspectiveMatrix);
+  this.gl.uniformMatrix4fv(perspUnif, false, this.perspectiveMatrix());
 
   this.loadVertexAttrib(posBuf, posAttr, vtxPosns, 3);
-
   this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, indexBuffer);
 
   this.gl.disable(this.gl.BLEND);
