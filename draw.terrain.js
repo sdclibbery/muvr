@@ -3,6 +3,7 @@
 var vtxShader = `
   uniform float timeIn;
   uniform mat4 perspIn;
+  uniform mat4 viewIn;
   uniform vec3 colIn;
 
   attribute vec3 posIn;
@@ -16,7 +17,7 @@ var vtxShader = `
     float delta = mod(distance, repeatSize);  // amount to move the drawn grid so it lines up with where the grid should be
     float index = distance-posIn.z-delta;     // value to use that moves with the grid without snapping back on the repeat
     float wave = 0.5*(sin(posIn.x*(0.14))+sin(index*(0.13)));
-    gl_Position = perspIn * vec4(posIn.x, posIn.y+wave*3.0, posIn.z + delta, 1); // apply the delta to give the sense of motion
+    gl_Position = perspIn * viewIn * vec4(posIn.x, posIn.y+wave*3.0, posIn.z + delta, 1); // apply the delta to give the sense of motion
     colour = colIn*(0.3 + pow(abs(wave), 1.5));
   }
 `;
@@ -70,6 +71,7 @@ var program = null;
 var posAttr = null;
 var posBuf = null;
 var perspUnif = null;
+var viewUnif = null;
 var timeUnif = null;
 var colUnif = null;
 
@@ -84,6 +86,7 @@ muvr.draw.prototype.terrain = function () {
     indexBuffer = this.createIndexBuffer(indexes);
     posAttr = this.gl.getAttribLocation(program, "posIn");
     perspUnif = this.gl.getUniformLocation(program, "perspIn");
+    viewUnif = this.gl.getUniformLocation(program, "viewIn");
     timeUnif = this.gl.getUniformLocation(program, "timeIn");
     colUnif = this.gl.getUniformLocation(program, "colIn");
   }
@@ -93,6 +96,7 @@ muvr.draw.prototype.terrain = function () {
   this.gl.uniform1f(timeUnif, this.time/1000);
   this.gl.uniform3f(colUnif, 0.5, 0.6, 0.8);
   this.gl.uniformMatrix4fv(perspUnif, false, this.perspectiveMatrix());
+  this.gl.uniformMatrix4fv(viewUnif, false, this.viewMatrix());
 
   this.loadVertexAttrib(posBuf, posAttr, vtxPosns, 3);
   this.gl.bindBuffer(this.gl.ELEMENT_ARRAY_BUFFER, indexBuffer);

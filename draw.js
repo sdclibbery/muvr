@@ -9,6 +9,7 @@ muvr.draw = function () {
   this.gl = null;
   this.cw = 1;
   this.ch = 1;
+  this._viewMatrix = new Float32Array(16);
 };
 
 muvr.draw.prototype.frameStart = function (t, gl, cw, ch) {
@@ -35,6 +36,21 @@ muvr.draw.prototype.leftStart = function () {
 muvr.draw.prototype.rightStart = function () {
   this._perspectiveMatrix = createPerspectiveMatrix(this.cw/2 / this.ch, eyeGap/2);
   this.gl.viewport(this.cw/2, 0, this.cw/2, this.ch);
+};
+
+muvr.draw.prototype.viewMatrix = function () {
+  return this._viewMatrix;
+};
+
+muvr.draw.prototype.orientate = function (yaw, pitch, roll) {
+  let m = this._viewMatrix;
+  const pi = 3.14159;
+  const sp = Math.sin(pitch*2*pi/360);
+  const cp = Math.cos(pitch*2*pi/360);
+  m[0]  = 1;   m[1] =  0;     m[2] =  0;    m[3] =  0;
+  m[4]  = 0;   m[5] =  cp;    m[6] =  sp;   m[7] =  0;
+  m[8]  = 0;   m[9] =  -sp;   m[10] = cp;   m[11] = 0;
+  m[12] = 0;   m[13] = 0;     m[14] = 0;    m[15] = 1;
 };
 
 muvr.draw.prototype.perspectiveMatrix = function () {

@@ -10,6 +10,10 @@ muvr.begin = function () {
   terrain = new muvr.terrain();
 };
 
+muvr.orientate = function (yaw, pitch, roll) {
+  draw.orientate(yaw, 90-pitch, roll);
+};
+
 function renderScene () {
   terrain.render(draw);
 }
