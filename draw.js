@@ -44,9 +44,10 @@ muvr.draw.prototype.viewMatrix = function () {
 
 muvr.draw.prototype.orientate = function (yaw, pitch, roll) {
   let m = this._viewMatrix;
-  const pi = 3.14159;
-  const sp = Math.sin(pitch*2*pi/360);
-  const cp = Math.cos(pitch*2*pi/360);
+  const pi = 3.14159265359;
+  const deg2rad = 2*pi/360;
+  const sp = Math.sin(pitch*deg2rad);
+  const cp = Math.cos(pitch*deg2rad);
   m[0]  = 1;   m[1] =  0;     m[2] =  0;    m[3] =  0;
   m[4]  = 0;   m[5] =  cp;    m[6] =  sp;   m[7] =  0;
   m[8]  = 0;   m[9] =  -sp;   m[10] = cp;   m[11] = 0;

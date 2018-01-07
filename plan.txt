@@ -28,8 +28,10 @@ x 2 viewport vr rendering
  x Draw same view into two viewports
  x Distinct projections for each viewport to give 3D
 o Look up and down - https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation
-o Look left and right tilt
-x clever offset proj matrix..??
+o Support full 3D view using quaternions
+o Look left and right
+o Look left and right using tilt if no yaw available
+? clever offset proj matrix..??
 
 Game Ideas
 o Rez meets Musis

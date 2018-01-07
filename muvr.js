@@ -15,7 +15,7 @@ muvr.orientate = function (yaw, pitch, roll) {
 
   const phoneIsLandscape = false;
   if (phoneIsLandscape) {
-    draw.orientate(yaw, 90-pitch, pitch);
+    draw.orientate(yaw, roll, pitch);
   } else {
     draw.orientate(yaw, 90-pitch, roll);
   }
