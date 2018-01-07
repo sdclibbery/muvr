@@ -12,7 +12,7 @@ muvr.begin = function () {
 
 muvr.orientate = function (yaw, pitch, roll) {
   const deg2rad = Math.PI / 180;
-  draw.orientate(Quaternion.fromEuler(yaw*deg2rad, pitch*deg2rad, roll*deg2rad, 'ZXY'));
+  draw.orientate(Quaternion.fromEuler(roll*deg2rad, (90-pitch)*deg2rad, -yaw*deg2rad, 'ZXY'));
 };
 
 function renderScene () {

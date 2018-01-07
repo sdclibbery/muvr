@@ -48,19 +48,23 @@ function handleOrientation(event) {
   var x = event.beta;  // In degree in the range [-180,180]
   var y = event.gamma; // In degree in the range [-90,90]
 };
+let startingYaw;
 window.addEventListener('deviceorientation', function (e) {
   document.getElementById("debug-console").innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
 
-  let yaw = e.gamma;
-  let pitch = 90-e.beta;
-  let roll = -e.alpha;
-  const phoneIsLandscape = false;//Math.abs(roll) > Math.abs(yaw);
+  let yaw = e.alpha;
+  let pitch = e.beta;
+  let roll = e.gamma;
+  const phoneIsLandscape = Math.abs(roll) > Math.abs(pitch);
   if (phoneIsLandscape) {
     yaw = e.alpha;
     pitch = e.gamma;
     roll = e.beta;
   }
-  muvr.orientate(yaw, pitch, roll);
+  if (startingYaw === undefined) {
+    startingYaw = yaw;
+  }
+  muvr.orientate(yaw-startingYaw, pitch, roll);
 });
 
 var ctxGl = canvas.getContext("webgl");
