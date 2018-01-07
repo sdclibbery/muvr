@@ -1,5 +1,6 @@
 <html>
 <head>
+  <script type="text/javascript" src="quaternion.js"></script>
   <script type="text/javascript" src="muvr.js"></script>
   <script type="text/javascript" src="draw.js"></script>
   <script type="text/javascript" src="terrain.js"></script>
@@ -47,7 +48,16 @@ function handleOrientation(event) {
   var x = event.beta;  // In degree in the range [-180,180]
   var y = event.gamma; // In degree in the range [-90,90]
 };
-window.addEventListener('deviceorientation', (e) => muvr.orientate(e.alpha, e.beta, e.gamma));
+window.addEventListener('deviceorientation', function (e) {
+  document.getElementById("debug-console").innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
+
+  const phoneIsLandscape = false;
+  if (phoneIsLandscape) {
+    muvr.orientate(e.alpha, e.gamma, e.beta);
+  } else {
+    muvr.orientate(e.gamma, 90-e.beta, -e.alpha);
+  }
+});
 
 var ctxGl = canvas.getContext("webgl");
 if (!ctxGl) { ctxGl = canvas.getContext("experimental-webgl"); }

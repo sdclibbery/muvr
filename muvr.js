@@ -11,14 +11,8 @@ muvr.begin = function () {
 };
 
 muvr.orientate = function (yaw, pitch, roll) {
-  document.getElementById("debug-console").innerHTML = `yaw: ${yaw.toFixed(1)}  pitch: ${pitch.toFixed(1)}  roll: ${roll.toFixed(1)}`;
-
-  const phoneIsLandscape = false;
-  if (phoneIsLandscape) {
-    draw.orientate(yaw, roll, pitch);
-  } else {
-    draw.orientate(yaw, 90-pitch, roll);
-  }
+  const deg2rad = Math.PI / 180;
+  draw.orientate(Quaternion.fromEuler(yaw*deg2rad, pitch*deg2rad, roll*deg2rad, 'ZXY'));
 };
 
 function renderScene () {

@@ -42,16 +42,8 @@ muvr.draw.prototype.viewMatrix = function () {
   return this._viewMatrix;
 };
 
-muvr.draw.prototype.orientate = function (yaw, pitch, roll) {
-  let m = this._viewMatrix;
-  const pi = 3.14159265359;
-  const deg2rad = 2*pi/360;
-  const sp = Math.sin(pitch*deg2rad);
-  const cp = Math.cos(pitch*deg2rad);
-  m[0]  = 1;   m[1] =  0;     m[2] =  0;    m[3] =  0;
-  m[4]  = 0;   m[5] =  cp;    m[6] =  sp;   m[7] =  0;
-  m[8]  = 0;   m[9] =  -sp;   m[10] = cp;   m[11] = 0;
-  m[12] = 0;   m[13] = 0;     m[14] = 0;    m[15] = 1;
+muvr.draw.prototype.orientate = function (quat) {
+  quat.conjugate().toMatrix4().map((x,i) => this._viewMatrix[i] = x);
 };
 
 muvr.draw.prototype.perspectiveMatrix = function () {
