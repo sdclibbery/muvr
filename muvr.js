@@ -11,7 +11,14 @@ muvr.begin = function () {
 };
 
 muvr.orientate = function (yaw, pitch, roll) {
-  draw.orientate(yaw, 90-pitch, roll);
+  document.getElementById("debug-console").innerHTML = `yaw: ${yaw.toFixed(1)}  pitch: ${pitch.toFixed(1)}  roll: ${roll.toFixed(1)}`;
+
+  const phoneIsLandscape = false;
+  if (phoneIsLandscape) {
+    draw.orientate(yaw, 90-pitch, pitch);
+  } else {
+    draw.orientate(yaw, 90-pitch, roll);
+  }
 };
 
 function renderScene () {
