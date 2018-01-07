@@ -34,6 +34,13 @@ o Correct pitch on phone
 o Look left and right using tilt if no yaw available
 ? clever offset proj matrix..??
 
+gamma is pitch; flicking -90 down to 90 up
+alpha is Yaw
+beta is roll, +to the right
+
+portrait b90 g0
+landscape b0 g+-90
+
 Game Ideas
 o Rez meets Musis
 collect multiple items at once; they activate when released

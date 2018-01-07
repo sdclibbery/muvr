@@ -51,12 +51,16 @@ function handleOrientation(event) {
 window.addEventListener('deviceorientation', function (e) {
   document.getElementById("debug-console").innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
 
-  const phoneIsLandscape = false;
+  let yaw = e.gamma;
+  let pitch = 90-e.beta;
+  let roll = -e.alpha;
+  const phoneIsLandscape = false;//Math.abs(roll) > Math.abs(yaw);
   if (phoneIsLandscape) {
-    muvr.orientate(e.alpha, e.gamma, e.beta);
-  } else {
-    muvr.orientate(e.gamma, 90-e.beta, -e.alpha);
+    yaw = e.alpha;
+    pitch = e.gamma;
+    roll = e.beta;
   }
+  muvr.orientate(yaw, pitch, roll);
 });
 
 var ctxGl = canvas.getContext("webgl");
