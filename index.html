@@ -55,7 +55,7 @@ window.addEventListener('deviceorientation', function (e) {
 
   let yaw = -e.gamma;//e.alpha;
   let pitch = e.beta;
-  let roll = e.gamma;
+  let roll = pitch<=90 ? e.gamma : -e.gamma;
   const deviceIsRotated = Math.abs(roll) > Math.abs(pitch);
   if (deviceIsRotated) {
     debugConsole.innerHTML = 'Rotated: ' + debugConsole.innerHTML;

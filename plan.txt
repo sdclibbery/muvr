@@ -30,7 +30,7 @@ x 2 viewport vr rendering
 x Look up and down - https://developer.mozilla.org/en-US/docs/Web/API/Detecting_device_orientation
 x Support full 3D view using quaternions for laptop
 x Yaw should be relative (zeroed) to starting yaw
-o Roll flips sign when pitched upwards..?
+x Roll flips sign when pitched upwards..?
 o Correct on phone - inc landscape
 o Look left and right using tilt if no yaw available?
 ? clever offset proj matrix..??
