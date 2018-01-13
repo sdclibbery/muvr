@@ -53,20 +53,24 @@ window.addEventListener('deviceorientation', function (e) {
   let debugConsole = document.getElementById("debug-console")
   debugConsole.innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
 
-  let yaw = -e.gamma;//e.alpha;
-  let pitch = e.beta;
-  let roll = pitch<=90 ? e.gamma : -e.gamma;
-  const deviceIsRotated = Math.abs(roll) > Math.abs(pitch);
-  if (deviceIsRotated) {
-    debugConsole.innerHTML = 'Rotated: ' + debugConsole.innerHTML;
-    yaw = -e.beta;//e.alpha;
-    pitch = e.gamma < 0 ? -e.gamma : 180-e.gamma;
-    roll = e.beta;
+  let ori = {
+    yaw: e.alpha,
+    pitch: e.beta,
+    roll: e.beta<=90 ? e.gamma : -e.gamma
+  };
+
+  const phoneInLandscapeMode = Math.abs(ori.roll) > Math.abs(ori.pitch);
+  if (phoneInLandscapeMode) {
+    debugConsole.innerHTML = 'phoneInLandscapeMode<br/>' + debugConsole.innerHTML;
+    ori.yaw = -e.beta; // dont use yaw; its not reliable on device without gyro
+    ori.pitch = e.gamma < 0 ? -e.gamma : 180-e.gamma;
+    ori.roll = e.beta;
   }
+
   if (startingYaw === undefined) {
-    startingYaw = yaw;
+    startingYaw = ori.yaw;
   }
-  muvr.orientate(yaw-startingYaw, pitch, roll);
+  muvr.orientate(ori.yaw-startingYaw, ori.pitch, ori.roll);
 });
 
 var ctxGl = canvas.getContext("webgl");
