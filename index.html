@@ -50,14 +50,16 @@ function handleOrientation(event) {
 };
 let startingYaw;
 window.addEventListener('deviceorientation', function (e) {
-  document.getElementById("debug-console").innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
+  let debugConsole = document.getElementById("debug-console")
+  debugConsole.innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
 
-  let yaw = e.alpha;
+  let yaw = -e.gamma;//e.alpha;
   let pitch = e.beta;
   let roll = e.gamma;
-  const phoneIsLandscape = Math.abs(roll) > Math.abs(pitch);
-  if (phoneIsLandscape) {
-    yaw = e.alpha;
+  const deviceIsRotated = Math.abs(roll) > Math.abs(pitch);
+  if (deviceIsRotated) {
+    debugConsole.innerHTML = 'Rotated: ' + debugConsole.innerHTML;
+    yaw = -e.beta;//e.alpha;
     pitch = e.gamma;
     roll = e.beta;
   }
