@@ -53,18 +53,24 @@ window.addEventListener('deviceorientation', function (e) {
   let debugConsole = document.getElementById("debug-console")
   debugConsole.innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
 
-  let ori = {
-    yaw: e.alpha,
-    pitch: e.beta,
-    roll: e.beta<=90 ? e.gamma : -e.gamma
-  };
-
-  const phoneInLandscapeMode = Math.abs(ori.roll) > Math.abs(ori.pitch);
+  let ori;
+  const phoneInLandscapeMode = Math.abs(e.gamma) > Math.abs(e.beta);
   if (phoneInLandscapeMode) {
     debugConsole.innerHTML = 'phoneInLandscapeMode<br/>' + debugConsole.innerHTML;
-    ori.yaw = -e.beta; // dont use yaw; its not reliable on device without gyro
-    ori.pitch = e.gamma < 0 ? -e.gamma : 180-e.gamma;
-    ori.roll = e.beta;
+    ori = {
+      yaw: e.alpha,
+      pitch: e.gamma,
+      roll: e.beta
+    };
+    ori.yaw = -e.beta; // dont use real yaw; its not reliable on device without gyro
+    ori.pitch = ori.pitch<0 ? -ori.pitch : 180-ori.pitch; // pitch needs fixing when device is rotated
+  } else {
+    ori = {
+      yaw: e.alpha,
+      pitch: e.beta,
+      roll: e.gamma
+    };
+    ori.roll *= ori.pitch<=90 ? 1 : -1; // fix for roll flipping sign when device is pitched upwards
   }
 
   if (startingYaw === undefined) {
