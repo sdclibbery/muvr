@@ -60,7 +60,7 @@ window.addEventListener('deviceorientation', function (e) {
   if (deviceIsRotated) {
     debugConsole.innerHTML = 'Rotated: ' + debugConsole.innerHTML;
     yaw = -e.beta;//e.alpha;
-    pitch = e.gamma;
+    pitch = e.gamma < 0 ? -e.gamma : 180-e.gamma;
     roll = e.beta;
   }
   if (startingYaw === undefined) {
