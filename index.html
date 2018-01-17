@@ -71,12 +71,13 @@ window.addEventListener('deviceorientation', function (e) {
       roll: e.gamma
     };
     ori.roll *= ori.pitch<=90 ? 1 : -1; // fix for roll flipping sign when device is pitched upwards
+    if (startingYaw === undefined) {
+      startingYaw = ori.yaw;
+    }
+    ori.yaw -= startingYaw;
   }
 
-  if (startingYaw === undefined) {
-    startingYaw = ori.yaw;
-  }
-  muvr.orientate(ori.yaw-startingYaw, ori.pitch, ori.roll);
+  muvr.orientate(ori.yaw, ori.pitch, ori.roll);
 });
 
 var ctxGl = canvas.getContext("webgl");

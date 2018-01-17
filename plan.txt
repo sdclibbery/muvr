@@ -31,16 +31,11 @@ x Look up and down - https://developer.mozilla.org/en-US/docs/Web/API/Detecting_
 x Support full 3D view using quaternions for laptop
 x Yaw should be relative (zeroed) to starting yaw
 x Roll flips sign when pitched upwards..?
+x Look left and right using tilt on phone
 o Correct on phone - inc landscape
-o Look left and right using tilt if no yaw available?
-? clever offset proj matrix..??
-
-gamma is pitch; flicking -90 down to 90 up
-alpha is Yaw
-beta is roll, +to the right
-
-portrait b90 g0
-landscape b0 g+-90
+ Need to write tests for the phone createShader
+  Put in specific example alpha/beta/gamma values and assert yaw/pitch/roll outputs
+o Should switch based on user agent not 'phone in landscape mode'??
 
 Game Ideas
 o Rez meets Musis
