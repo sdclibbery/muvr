@@ -51,12 +51,12 @@ function handleOrientation(event) {
 let startingYaw;
 window.addEventListener('deviceorientation', function (e) {
   let debugConsole = document.getElementById("debug-console")
-  debugConsole.innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
+  debugConsole.innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)} - ${window.navigator.userAgent}`;
 
   let ori;
-  const phoneInLandscapeMode = Math.abs(e.gamma) > Math.abs(e.beta);
-  if (phoneInLandscapeMode) {
-    debugConsole.innerHTML = 'phoneInLandscapeMode<br/>' + debugConsole.innerHTML;
+  const isHuawei = window.navigator.userAgent.toLowerCase().includes('huawei');
+  if (isHuawei) {
+    debugConsole.innerHTML = 'isHuawei<br/>' + debugConsole.innerHTML;
     ori = {
       yaw: e.alpha,
       pitch: e.gamma,

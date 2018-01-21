@@ -32,10 +32,10 @@ x Support full 3D view using quaternions for laptop
 x Yaw should be relative (zeroed) to starting yaw
 x Roll flips sign when pitched upwards..?
 x Look left and right using tilt on phone
+o Should switch based on user agent not 'phone in landscape mode'
 o Correct on phone - inc landscape
  Need to write tests for the phone createShader
   Put in specific example alpha/beta/gamma values and assert yaw/pitch/roll outputs
-o Should switch based on user agent not 'phone in landscape mode'??
 
 Game Ideas
 o Rez meets Musis
