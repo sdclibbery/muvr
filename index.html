@@ -57,13 +57,7 @@ window.addEventListener('deviceorientation', function (e) {
   let ori;
   if (muvr.huaweiOrientation.isHuawei(window.navigator.userAgent)) {
     debugConsole.innerHTML = 'isHuawei<br/>' + debugConsole.innerHTML;
-    ori = {
-      yaw: e.alpha,
-      pitch: e.gamma,
-      roll: e.beta
-    };
-    ori.yaw = -e.beta; // dont use real yaw; its not reliable on device without gyro
-    ori.pitch = ori.pitch<0 ? -ori.pitch : 180-ori.pitch; // pitch needs fixing when device is rotated
+    ori = muvr.huaweiOrientation.orientate(e.alpha, e.beta, e.gamma)
   } else {
     ori = {
       yaw: e.alpha,
