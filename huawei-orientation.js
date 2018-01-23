@@ -3,9 +3,14 @@
 muvr.huaweiOrientation = {
   isHuawei: (agent) => agent.toLowerCase().includes('huawei'),
   orientate: (alpha, beta, gamma) => {
+    const lookingUp = (gamma > 0)
+    if (lookingUp) {
+      beta = beta - 180
+      gamma = gamma - 180
+    }
     let ori = {
       yaw: alpha,
-      pitch: gamma<=0 ? -gamma : 180-gamma,
+      pitch: -gamma,
       roll: beta
     };
     ori.yaw = -beta
@@ -32,11 +37,12 @@ test('phone agent',
   ho.isHuawei('Mozilla/5.0 (Linux; U; Android 4.2.2; nl-nl; HUAWEI P6-U06 Build/HuaweiP6-U06) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30')
 )
 
-test('beta used for roll in landscape on phone', 2, ho.orientate(1,2,3).roll)
+test('beta used for roll in landscape on phone', 2, ho.orientate(1,2,0).roll)
 test('gamma used for pitch in landscape on phone', 0, ho.orientate(1,2,0).pitch)
 test('yaw does not come from alpha, because its unreliable on phone', 0, ho.orientate(211,0,-80).yaw)
 test('yaw comes from inverted roll', -10, ho.orientate(0,10,0).yaw)
 test('pitch is inverted gamma when looking down', 80, ho.orientate(0,0,-80).pitch)
 test('pitch is modified gamma when looking up', 100, ho.orientate(0,0,80).pitch)
+test('beta jumps when looking up', 10, ho.orientate(0,190,80).roll)
 
 })();
