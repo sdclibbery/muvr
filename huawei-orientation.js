@@ -5,7 +5,7 @@ muvr.huaweiOrientation = {
   orientate: (alpha, beta, gamma) => {
     const lookingUp = (gamma > 0)
     if (lookingUp) {
-      beta = beta - 180
+      beta = 180 - beta
       gamma = gamma - 180
     }
     let ori = {
@@ -43,6 +43,6 @@ test('yaw does not come from alpha, because its unreliable on phone', 0, ho.orie
 test('yaw comes from inverted roll', -10, ho.orientate(0,10,0).yaw)
 test('pitch is inverted gamma when looking down', 80, ho.orientate(0,0,-80).pitch)
 test('pitch is modified gamma when looking up', 100, ho.orientate(0,0,80).pitch)
-test('beta jumps when looking up', 10, ho.orientate(0,190,80).roll)
+test('beta jumps and reverses when looking up', -10, ho.orientate(0,190,80).roll)
 
 })();

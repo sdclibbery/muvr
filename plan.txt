@@ -34,8 +34,6 @@ x Roll flips sign when pitched upwards..?
 x Look left and right using tilt on phone
 x Should switch based on user agent not 'phone in landscape mode'
 o Correct on phone in landscape
- Extract Huawei phone orientation module
- Unit test it
 
 Game Ideas
 o Rez meets Musis
