@@ -39,9 +39,6 @@ function goFullscreen () {
 window.onmousedown = goFullscreen;
 window.ontouchstart = goFullscreen;
 
-let stayAwake = new StayAwake ();
-stayAwake.enable();
-
 function onResize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
