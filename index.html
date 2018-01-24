@@ -1,5 +1,6 @@
 <html>
 <head>
+  <script type="text/javascript" src="stay-awake.js"></script>
   <script type="text/javascript" src="quaternion.js"></script>
   <script type="text/javascript" src="muvr.js"></script>
   <script type="text/javascript" src="huawei-orientation.js"></script>
@@ -38,6 +39,9 @@ function goFullscreen () {
 window.onmousedown = goFullscreen;
 window.ontouchstart = goFullscreen;
 
+let stayAwake = new StayAwake ();
+stayAwake.enable();
+
 function onResize() {
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
@@ -52,11 +56,11 @@ function handleOrientation(event) {
 let startingYaw;
 window.addEventListener('deviceorientation', function (e) {
   let debugConsole = document.getElementById("debug-console")
-  debugConsole.innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)} - ${window.navigator.userAgent}`;
+  debugConsole.innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
 
   let ori;
   if (muvr.huaweiOrientation.isHuawei(window.navigator.userAgent)) {
-    debugConsole.innerHTML = 'isHuawei<br/>' + debugConsole.innerHTML;
+    debugConsole.innerHTML += ' isHuawei';
     ori = muvr.huaweiOrientation.orientate(e.alpha, e.beta, e.gamma)
   } else {
     ori = {

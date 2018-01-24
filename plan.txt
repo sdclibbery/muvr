@@ -33,7 +33,14 @@ x Yaw should be relative (zeroed) to starting yaw
 x Roll flips sign when pitched upwards..?
 x Look left and right using tilt on phone
 x Should switch based on user agent not 'phone in landscape mode'
-o Correct on phone in landscape
+x Correct on phone in landscape
+o Stop the screensaver: https://github.com/richtr/NoSleep.js
+o Try running audio synth at the same time
+o Try rendering on a thread
+ https://hacks.mozilla.org/2016/01/webgl-off-the-main-thread/
+o Try doing audio synth on a thread
+ Should be able to do waveform generation in a web worker, but all actual AudioContext usage has to be on main thread
+ https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API
 
 Game Ideas
 o Rez meets Musis
