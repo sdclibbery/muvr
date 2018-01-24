@@ -52,9 +52,6 @@ function handleOrientation(event) {
 };
 let startingYaw;
 window.addEventListener('deviceorientation', function (e) {
-  let debugConsole = document.getElementById("debug-console")
-  debugConsole.innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
-
   let ori;
   if (muvr.huaweiOrientation.isHuawei(window.navigator.userAgent)) {
     debugConsole.innerHTML += ' isHuawei';
