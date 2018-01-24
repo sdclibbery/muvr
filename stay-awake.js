@@ -8,6 +8,7 @@ noSleepVideo.setAttribute('src', mediaFile)
 noSleepVideo.addEventListener('timeupdate', function (e) {
   if (noSleepVideo.currentTime > 0.5) {
     noSleepVideo.currentTime = Math.random()
+    document.getElementById("debug-console").innerHTML = `${noSleepVideo.currentTime}`;
   }
 }.bind(this))
 noSleepVideo.play() // use pause() to disable stay-awake if necessary
