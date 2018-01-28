@@ -34,6 +34,7 @@ x Roll flips sign when pitched upwards..?
 x Look left and right using tilt on phone
 x Should switch based on user agent not 'phone in landscape mode'
 x Correct on phone in landscape
+o Phone broken: debug it...
 o Stop the screensaver: https://github.com/richtr/NoSleep.js
 o Try running audio synth at the same time
 o Try rendering on a thread
