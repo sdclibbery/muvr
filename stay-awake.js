@@ -10,4 +10,5 @@ noSleepVideo.addEventListener('timeupdate', function (e) {
     noSleepVideo.currentTime = Math.random()
   }
 }.bind(this))
-noSleepVideo.play() // use pause() to disable stay-awake if necessary
+
+muvr.stayAwake = () => noSleepVideo.play() // use pause() to disable stay-awake if necessary

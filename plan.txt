@@ -34,8 +34,9 @@ x Roll flips sign when pitched upwards..?
 x Look left and right using tilt on phone
 x Should switch based on user agent not 'phone in landscape mode'
 x Correct on phone in landscape
-o Phone broken: debug it...
-o Stop the screensaver: https://github.com/richtr/NoSleep.js
+x Stop the screensaver: https://github.com/richtr/NoSleep.js
+x Phone magically not broken
+x Stay awake not working because the video 'play' must come from a user interaction; suggest we trigger it on the fullscreen toggle
 o Try running audio synth at the same time
 o Try rendering on a thread
  https://hacks.mozilla.org/2016/01/webgl-off-the-main-thread/

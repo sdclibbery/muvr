@@ -1,8 +1,8 @@
 <html>
 <head>
-  <script type="text/javascript" src="stay-awake.js"></script>
   <script type="text/javascript" src="quaternion.js"></script>
   <script type="text/javascript" src="muvr.js"></script>
+  <script type="text/javascript" src="stay-awake.js"></script>
   <script type="text/javascript" src="huawei-orientation.js"></script>
   <script type="text/javascript" src="draw.js"></script>
   <script type="text/javascript" src="terrain.js"></script>
@@ -35,6 +35,7 @@ function goFullscreen () {
   if (canvas.webkitRequestFullscreen) { canvas.webkitRequestFullscreen(); }
   if (canvas.mozRequestFullScreen) { canvas.mozRequestFullScreen(); }
   if (canvas.msRequestFullscreen) { canvas.msRequestFullscreen(); }
+  muvr.stayAwake();
 }
 window.onmousedown = goFullscreen;
 window.ontouchstart = goFullscreen;
