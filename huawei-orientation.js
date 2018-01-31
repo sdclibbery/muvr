@@ -13,7 +13,7 @@ muvr.huaweiOrientation = {
       pitch: -gamma,
       roll: beta
     };
-    ori.yaw = -beta
+    ori.yaw = -beta*2
     return ori
   }
 };
@@ -40,7 +40,7 @@ test('phone agent',
 test('beta used for roll in landscape on phone', 2, ho.orientate(1,2,0).roll)
 test('gamma used for pitch in landscape on phone', 0, ho.orientate(1,2,0).pitch)
 test('yaw does not come from alpha, because its unreliable on phone', 0, ho.orientate(211,0,-80).yaw)
-test('yaw comes from inverted roll', -10, ho.orientate(0,10,0).yaw)
+test('yaw comes from inverted roll', -20, ho.orientate(0,10,0).yaw)
 test('pitch is inverted gamma when looking down', 80, ho.orientate(0,0,-80).pitch)
 test('pitch is modified gamma when looking up', 100, ho.orientate(0,0,80).pitch)
 test('beta jumps and reverses when looking up', -10, ho.orientate(0,190,80).roll)
