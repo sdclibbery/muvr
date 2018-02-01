@@ -9,6 +9,8 @@
   <script type="text/javascript" src="terrain.draw.js"></script>
   <script type="text/javascript" src="play.js"></script>
   <script type="text/javascript" src="percussion.play.js"></script>
+  <script type="text/javascript" src="metronome.js"></script>
+  <script type="text/javascript" src="beats.js"></script>
   <style>
   .fullscreen {
     position:absolute;
@@ -85,11 +87,14 @@ var tLast;
 var frame = function (t) {
   if (tLast) {
     muvr.frame(t, (t - tLast)/1000, ctxGl, canvas.width, canvas.height);
+    muvr.metronome.update(muvr.play.timeNow());
   }
   tLast = t;
   window.requestAnimationFrame(frame);
 };
 window.requestAnimationFrame(frame);
+
+muvr.metronome.listen((beat) => muvr.beats.next(beat));
 
   </script>
 </body>
