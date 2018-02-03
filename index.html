@@ -3,7 +3,7 @@
   <script type="text/javascript" src="quaternion.js"></script>
   <script type="text/javascript" src="muvr.js"></script>
   <script type="text/javascript" src="stay-awake.js"></script>
-  <script type="text/javascript" src="huawei-orientation.js"></script>
+  <script type="text/javascript" src="huaweip9lite-orientation.js"></script>
   <script type="text/javascript" src="draw.js"></script>
   <script type="text/javascript" src="terrain.js"></script>
   <script type="text/javascript" src="terrain.draw.js"></script>
@@ -61,9 +61,9 @@ window.addEventListener('deviceorientation', function (e) {
   debugConsole.innerHTML = `alpha: ${e.alpha.toFixed(1)}  beta: ${e.beta.toFixed(1)}  gamma: ${e.gamma.toFixed(1)}`;
 
   let ori;
-  if (muvr.huaweiOrientation.isHuawei(window.navigator.userAgent)) {
-    debugConsole.innerHTML += ' isHuawei';
-    ori = muvr.huaweiOrientation.orientate(e.alpha, e.beta, e.gamma)
+  if (muvr.huaweiP9LiteOrientation.isHuaweiP9Lite(window.navigator.userAgent)) {
+    debugConsole.innerHTML += ' isHuaweiP9Lite';
+    ori = muvr.huaweiP9LiteOrientation.orientate(e.alpha, e.beta, e.gamma)
   } else {
     ori = {
       yaw: e.alpha,

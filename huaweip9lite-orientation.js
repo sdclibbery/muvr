@@ -1,7 +1,7 @@
 (function () {
 
-muvr.huaweiOrientation = {
-  isHuawei: (agent) => agent.toLowerCase().includes('huawei'),
+muvr.huaweiP9LiteOrientation = {
+  isHuaweiP9Lite: (agent) => agent.toUpperCase().includes('HUAWEI VNS-L31'),
   orientate: (alpha, beta, gamma) => {
     const lookingUp = (gamma > 0)
     if (lookingUp) {
@@ -26,15 +26,15 @@ const test = (name, expected, actual) => {
     alert(msg)
   }
 }
-const ho = muvr.huaweiOrientation
+const ho = muvr.huaweiP9LiteOrientation
 
 test('desktop agent',
   false,
-  ho.isHuawei('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36')
+  ho.isHuaweiP9Lite('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36')
 )
 test('phone agent',
   true,
-  ho.isHuawei('Mozilla/5.0 (Linux; U; Android 4.2.2; nl-nl; HUAWEI P6-U06 Build/HuaweiP6-U06) AppleWebKit/534.30 (KHTML, like Gecko) Version/4.0 Mobile Safari/534.30')
+  ho.isHuaweiP9Lite('Mozilla/5.0 (Linux; Android 6.0; HUAWEI VNS-L31 Build/HUAWEIVNS-L31) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.137 Mobile Safari/537.36')
 )
 
 test('beta used for roll in landscape on phone', 2, ho.orientate(1,2,0).roll)
